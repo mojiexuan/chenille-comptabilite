@@ -4,8 +4,6 @@ publish_to: "none"
 version: 1.0.0+1
 
 # 应用元数据
-# 作者信息
-author: "陈佳宝"
 # homepage: "https://your-website.com"  # 可选：应用官网
 # repository: "https://github.com/your-username/chenille"  # 可选：代码仓库
 

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:chenille_comptabilite/config/theme.dart';
-import 'package:chenille_comptabilite/utils/date_util.dart';
+import 'package:chenille_comptabilite/pages/detail/widgets/calendar_header.dart';
+import 'package:chenille_comptabilite/pages/detail/widgets/calendar_week_row.dart';
+import 'package:chenille_comptabilite/pages/detail/widgets/calendar_day_cell.dart';
 
 /// 可折叠日历组件（支持周视图和月视图切换）
 class CollapsibleCalendar extends StatefulWidget {
   final DateTime selectedDate;
   final ValueChanged<DateTime> onDateSelected;
-  final ValueChanged<bool> onExpanded; // 通知父组件展开/折叠状态
+  final ValueChanged<bool> onExpanded;
 
   const CollapsibleCalendar({
     super.key,
@@ -22,7 +23,7 @@ class CollapsibleCalendar extends StatefulWidget {
 class _CollapsibleCalendarState extends State<CollapsibleCalendar>
     with SingleTickerProviderStateMixin {
   late DateTime _currentMonth;
-  bool _isExpanded = false; // 默认关闭（周视图）
+  bool _isExpanded = false;
 
   @override
   void initState() {
@@ -54,9 +55,15 @@ class _CollapsibleCalendarState extends State<CollapsibleCalendar>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildHeader(),
+            CalendarHeader(
+              currentMonth: _currentMonth,
+              isExpanded: _isExpanded,
+              onPreviousMonth: _previousMonth,
+              onNextMonth: _nextMonth,
+              onToggleExpanded: _toggleExpanded,
+            ),
             const SizedBox(height: 16),
-            _buildWeekDays(),
+            const CalendarWeekRow(),
             const SizedBox(height: 8),
             _buildCalendarGrid(),
           ],
@@ -65,74 +72,11 @@ class _CollapsibleCalendarState extends State<CollapsibleCalendar>
     );
   }
 
-  /// 构建头部（年月和切换按钮）
-  Widget _buildHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.chevron_left),
-          onPressed: _previousMonth,
-        ),
-        GestureDetector(
-          onTap: _toggleExpanded,
-          child: Row(
-            children: [
-              Text(
-                DateUtil.formatYearMonth(_currentMonth),
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(width: 4),
-              Icon(
-                _isExpanded
-                    ? Icons.keyboard_arrow_up
-                    : Icons.keyboard_arrow_down,
-                size: 20,
-                color: AppTheme.primaryColor,
-              ),
-            ],
-          ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.chevron_right),
-          onPressed: _nextMonth,
-        ),
-      ],
-    );
-  }
-
-  /// 构建星期标题
-  Widget _buildWeekDays() {
-    const weekDays = ['一', '二', '三', '四', '五', '六', '日'];
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: weekDays.map((day) {
-        return SizedBox(
-          width: 36,
-          child: Text(
-            day,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.grey[600],
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
   /// 构建日历网格
   Widget _buildCalendarGrid() {
     if (_isExpanded) {
-      // 月视图：显示整月
       return _buildMonthView();
     } else {
-      // 周视图：只显示选中日期所在的周
       return _buildWeekView();
     }
   }
@@ -161,7 +105,12 @@ class _CollapsibleCalendarState extends State<CollapsibleCalendar>
 
               final date =
                   DateTime(_currentMonth.year, _currentMonth.month, day);
-              return _buildDayCell(date);
+              return CalendarDayCell(
+                date: date,
+                selectedDate: widget.selectedDate,
+                currentMonth: _currentMonth,
+                onDateSelected: widget.onDateSelected,
+              );
             }),
           ),
         );
@@ -181,50 +130,13 @@ class _CollapsibleCalendarState extends State<CollapsibleCalendar>
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(7, (index) {
           final date = weekStart.add(Duration(days: index));
-          return _buildDayCell(date);
+          return CalendarDayCell(
+            date: date,
+            selectedDate: widget.selectedDate,
+            currentMonth: _currentMonth,
+            onDateSelected: widget.onDateSelected,
+          );
         }),
-      ),
-    );
-  }
-
-  /// 构建日期单元格
-  Widget _buildDayCell(DateTime date) {
-    final isSelected = DateUtil.isSameDay(date, widget.selectedDate);
-    final isToday = DateUtil.isToday(date);
-    final isFuture = date.isAfter(DateTime.now());
-    final isCurrentMonth = date.month == _currentMonth.month;
-
-    return GestureDetector(
-      onTap: isFuture ? null : () => widget.onDateSelected(date),
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppTheme.primaryColor
-              : isToday
-                  ? AppTheme.primaryColor.withOpacity(0.1)
-                  : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          '${date.day}',
-          style: TextStyle(
-            fontSize: 14,
-            color: isFuture
-                ? Colors.grey[400]
-                : isSelected
-                    ? Colors.white
-                    : isToday
-                        ? AppTheme.primaryColor
-                        : isCurrentMonth
-                            ? Colors.black87
-                            : Colors.grey[400],
-            fontWeight:
-                isSelected || isToday ? FontWeight.w600 : FontWeight.normal,
-          ),
-        ),
       ),
     );
   }

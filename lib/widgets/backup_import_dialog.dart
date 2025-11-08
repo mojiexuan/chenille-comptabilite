@@ -5,6 +5,8 @@ import 'package:chenille_comptabilite/config/theme.dart';
 import 'package:chenille_comptabilite/models/backup_file.dart';
 import 'package:chenille_comptabilite/services/backup_service.dart';
 import 'package:chenille_comptabilite/widgets/toast.dart';
+import 'package:chenille_comptabilite/widgets/backup_import/backup_file_list.dart';
+import 'package:chenille_comptabilite/widgets/backup_import/backup_empty_view.dart';
 
 /// 备份导入对话框
 class BackupImportDialog extends StatefulWidget {
@@ -47,15 +49,19 @@ class _BackupImportDialogState extends State<BackupImportDialog> {
             // 备份文件列表
             Expanded(
               child: _loading
-                  ? _buildLoadingView()
+                  ? const Center(child: CircularProgressIndicator())
                   : _backupFiles!.isEmpty
-                      ? _buildEmptyView()
-                      : _buildFileList(),
+                      ? const BackupEmptyView()
+                      : BackupFileList(
+                          backupFiles: _backupFiles!,
+                          onFileSelected: _selectFile,
+                          onFileDelete: _deleteFile,
+                        ),
             ),
             const SizedBox(height: 16),
 
             // 底部按钮
-            _buildBottomButtons(),
+            _buildBottomButton(),
           ],
         ),
       ),
@@ -84,190 +90,8 @@ class _BackupImportDialogState extends State<BackupImportDialog> {
     );
   }
 
-  /// 构建加载视图
-  Widget _buildLoadingView() {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-
-  /// 构建空视图
-  Widget _buildEmptyView() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.folder_open,
-              size: 48,
-              color: Colors.grey[400],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              '暂无应用备份文件',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '只显示应用导出的备份文件\n如需导入其他JSON文件，请点击下方按钮',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey[500],
-                height: 1.5,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// 构建文件列表
-  Widget _buildFileList() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // 说明文本
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: AppTheme.primaryColor.withOpacity(0.05),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.info_outline,
-                size: 16,
-                color: AppTheme.primaryColor,
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  '显示应用导出的备份 • 点击底部按钮可导入其他文件',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[700],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 12),
-
-        // 文件列表
-        Expanded(
-          child: ListView.separated(
-            shrinkWrap: true,
-            itemCount: _backupFiles!.length,
-            separatorBuilder: (context, index) => const Divider(height: 1),
-            itemBuilder: (context, index) {
-              final backupFile = _backupFiles![index];
-              return _buildFileItem(backupFile);
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// 构建文件项
-  Widget _buildFileItem(BackupFile backupFile) {
-    return InkWell(
-      onTap: () => _selectFile(backupFile.file),
-      borderRadius: BorderRadius.circular(8),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-        child: Row(
-          children: [
-            // 文件图标
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: AppTheme.primaryColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Icon(
-                Icons.insert_drive_file,
-                size: 20,
-                color: AppTheme.primaryColor,
-              ),
-            ),
-            const SizedBox(width: 12),
-
-            // 文件信息
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    backupFile.displayName,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppTheme.textPrimary,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      Text(
-                        backupFile.formattedTime,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        '•',
-                        style: TextStyle(color: Colors.grey[400]),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        backupFile.formattedSize,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            // 删除按钮
-            IconButton(
-              icon: Icon(
-                Icons.delete_outline,
-                color: Colors.red[400],
-                size: 20,
-              ),
-              onPressed: () => _deleteFile(backupFile),
-              padding: const EdgeInsets.all(8),
-              constraints: const BoxConstraints(),
-              tooltip: '删除',
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   /// 构建底部按钮
-  Widget _buildBottomButtons() {
+  Widget _buildBottomButton() {
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton.icon(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:chenille_comptabilite/widgets/common_button.dart';
 
 /// 公共对话框
 class CommonDialog {
@@ -120,4 +119,3 @@ class CommonDialog {
     Navigator.of(context).pop();
   }
 }
-
