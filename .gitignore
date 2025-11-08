@@ -1,0 +1,99 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Android 构建产物（重要！这些文件很大，约2000+个文件）
+/android/app/build/
+/android/build/
+/android/.gradle/
+/android/local.properties
+
+# APK 和 AAB 文件（构建产物，不要提交）
+*.apk
+*.ap_
+*.aab
+*.apk.sha1
+
+# DEX 文件
+*.dex
+
+# 签名密钥（敏感信息，绝对不要提交到 Git！）
+/android/key.properties
+/android/app/upload-keystore.jks
+*.keystore
+*.jks
+
+# ProGuard/R8 输出
+/android/app/proguard-rules.pro.txt
+/android/app/proguard/
+
+# Flutter 日志文件
+flutter_*.log
+
+# iOS 构建产物（如果有的话）
+/ios/Flutter/App.framework
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Flutter.podspec
+/ios/Pods/
+/ios/.symlinks/
+/ios/Flutter/.last_build_id
+/ios/DerivedData/
+
+# 缓存和临时文件
+*.cache.dill.track.dill
+*.dill
+*.stamp
+
+# Gradle 临时文件
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# 编辑器备份文件
+*~
+*.bak
+*.swp
+*.swo
+*.orig
+

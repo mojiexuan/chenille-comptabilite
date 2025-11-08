@@ -1,0 +1,19 @@
+# flutter_launcher_icons配置
+# 运行命令: flutter pub run flutter_launcher_icons
+
+flutter_launcher_icons:
+  android: true # 生成Android图标
+  ios: false # 暂不生成iOS图标
+
+  # 主图标（必需）- 直接使用完整图标，不使用自适应图标
+  image_path: "assets/images/icon.png"
+
+  # 注释掉自适应图标配置，避免图标被放大
+  # adaptive_icon_foreground: "assets/images/icon.png"
+  # adaptive_icon_background: "#FF8A65"
+
+  # 移除旧图标
+  remove_alpha_ios: true
+
+  # Android圆角图标
+  min_sdk_android: 21

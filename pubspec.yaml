@@ -1,0 +1,61 @@
+name: chenille_comptabilite
+description: 毛虫记账 - 简洁卡通的记账应用，不联网、数据本地存储、无广告无会员
+publish_to: "none"
+version: 1.0.0+1
+
+# 应用元数据
+# 作者信息
+author: "陈佳宝"
+# homepage: "https://your-website.com"  # 可选：应用官网
+# repository: "https://github.com/your-username/chenille"  # 可选：代码仓库
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # 状态管理
+  provider: ^6.1.1
+
+  # 本地存储
+  shared_preferences: ^2.2.2
+
+  # 图表
+  fl_chart: ^0.66.0
+
+  # UUID生成
+  uuid: ^4.3.3
+
+  # 日期时间处理
+  intl: ^0.20.2
+
+  # UI图标
+  cupertino_icons: ^1.0.6
+
+  # 文件操作
+  path_provider: ^2.1.1
+  permission_handler: ^11.0.1
+  file_picker: ^8.0.0+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+
+  # 图片资源
+  assets:
+    - assets/images/
+
+  # 自定义字体（可选）
+  # fonts:
+  #   - family: CustomFont
+  #     fonts:
+  #       - asset: fonts/CustomFont-Regular.ttf
