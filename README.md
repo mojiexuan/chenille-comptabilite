@@ -27,6 +27,20 @@
 - **图表**：FL Chart
 - **其他**：Intl、UUID、File Picker、Path Provider
 
+## 📜 开源协议
+
+本项目采用 **CC BY-NC-SA 4.0**（知识共享 署名-非商业性使用-相同方式共享 4.0）协议。
+
+**简单来说**：
+
+- ✅ 可以自由学习、修改、分享
+- ✅ 必须保留作者署名
+- ❌ 禁止任何商业使用
+- ❌ 禁止嵌入收费项目
+- ✅ 衍生作品必须同样免费开源
+
+详细说明请查看 [LICENSE.txt](./LICENSE.txt) 和 [LICENSE_CN.md](./LICENSE_CN.md)
+
 ## 项目结构
 
 ```

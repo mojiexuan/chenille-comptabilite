@@ -1,0 +1,63 @@
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
+知识共享 署名-非商业性使用-相同方式共享 4.0 国际公共许可协议
+
+=======================================================================
+
+毛虫记账 (Chenille Comptabilite)
+Copyright (c) 2024 陈佳宝
+
+=======================================================================
+
+本作品采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议进行许可。
+
+您可以自由地：
+• 共享 — 在任何媒介以任何形式复制、发行本作品
+• 演绎 — 修改、转换或以本作品为基础进行创作
+
+惟须遵守下列条件：
+• 署名 — 您必须给出适当的署名，提供指向本许可协议的链接，同时标明是否（对原始作品）作了修改。
+• 非商业性使用 — 您不得将本作品用于商业目的。
+• 相同方式共享 — 如果您再混合、转换或者基于本作品进行创作，您必须基于与原先许可协议相同的许可协议分发您贡献的作品。
+
+重要说明：
+1. 禁止商业使用：本软件及其任何衍生版本不得用于任何商业项目、收费服务或盈利目的。
+2. 禁止嵌入收费项目：不得将本代码或其衍生代码集成到任何付费应用、服务或产品中。
+3. 必须开源：任何基于本项目的修改版本必须同样开源并使用相同的许可协议。
+4. 必须免费：所有衍生作品必须完全免费提供，不得收取任何费用。
+
+商业使用的定义包括但不限于：
+• 在付费应用或服务中使用
+• 通过广告获利
+• 作为付费产品的一部分
+• 在商业培训或课程中使用
+• 任何直接或间接的盈利行为
+
+如需商业使用授权，请联系版权所有者。
+
+完整的许可协议内容请访问：
+https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+中文翻译版本：
+https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans
+
+=======================================================================
+
+免责声明：
+
+本软件按"原样"提供，不提供任何形式的明示或暗示担保，包括但不限于对适销性、
+特定用途适用性和非侵权性的担保。在任何情况下，作者或版权持有人均不对任何索赔、
+损害或其他责任负责，无论是在合同诉讼、侵权行为还是其他方面，由软件或软件的使用
+或其他交易引起、产生或与之相关。
+
+=======================================================================
+
+DISCLAIMER:
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
