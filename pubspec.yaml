@@ -39,6 +39,10 @@ dependencies:
   permission_handler: ^11.0.1
   file_picker: ^8.0.0+1
 
+  # 网络请求
+  dio: ^5.4.0
+  connectivity_plus: ^5.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
