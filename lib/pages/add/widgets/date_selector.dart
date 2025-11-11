@@ -44,7 +44,7 @@ class DateSelector extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  DateUtil.formatFull(selectedDate),
+                  DateUtil.formatFullWithRelative(selectedDate),
                   style: const TextStyle(
                     fontSize: 15,
                     color: AppTheme.textPrimary,
@@ -93,4 +93,3 @@ class DateSelector extends StatelessWidget {
     }
   }
 }
-

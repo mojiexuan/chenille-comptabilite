@@ -33,7 +33,7 @@ class DateBarSelector extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Text(
-              DateUtil.formatFull(selectedDate),
+              DateUtil.formatFullWithRelative(selectedDate),
               style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,

@@ -93,4 +93,21 @@ class DateUtil {
       return formatMonthDay(date);
     }
   }
+
+  /// 格式化日期 - 完整（带相对日期优化）
+  /// 今天显示：今天 周一
+  /// 昨天显示：昨天 周日
+  /// 其他日期显示：2025年11月9日 周六
+  static String formatFullWithRelative(DateTime date) {
+    final weekdays = ['', '周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+    final weekday = weekdays[date.weekday];
+
+    if (isToday(date)) {
+      return '今天 $weekday';
+    } else if (isYesterday(date)) {
+      return '昨天 $weekday';
+    } else {
+      return '${date.year}年${date.month}月${date.day}日 $weekday';
+    }
+  }
 }
