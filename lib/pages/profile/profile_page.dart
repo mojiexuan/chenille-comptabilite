@@ -64,10 +64,7 @@ class ProfilePage extends StatelessWidget {
                   title: '关于',
                   children: [
                     // 检查更新按钮
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: UpdateCheckerButton(),
-                    ),
+                    const UpdateCheckerButton(),
                     const SizedBox(height: 12),
                     ProfileMenuItem(
                       icon: Icons.info_outline,

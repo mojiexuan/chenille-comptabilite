@@ -19,23 +19,19 @@ class _UpdateCheckerButtonState extends State<UpdateCheckerButton> {
   Widget build(BuildContext context) {
     final hasNewVersion = _versionService.hasNewVersion;
 
-    return GestureDetector(
+    return InkWell(
       onTap: _checkUpdate,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(AppTheme.borderRadiusMedium),
-        ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
         child: Row(
           children: [
             // 图标
             Icon(
               Icons.system_update_outlined,
-              color: AppTheme.textSecondary,
-              size: 20,
+              color: AppTheme.primaryColor,
+              size: 24,
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 16),
             // 文本
             Expanded(
               child: Column(
@@ -104,8 +100,7 @@ class _UpdateCheckerButtonState extends State<UpdateCheckerButton> {
             else
               Icon(
                 Icons.chevron_right,
-                color: AppTheme.textHint,
-                size: 20,
+                color: Colors.grey[400],
               ),
           ],
         ),

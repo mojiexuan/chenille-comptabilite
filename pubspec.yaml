@@ -37,13 +37,13 @@ dependencies:
   # 文件操作
   path_provider: ^2.1.1
   permission_handler: ^11.0.1
-  file_picker: ^8.0.0+1
+  file_picker: ^8.1.2
 
   # 网络请求
   dio: ^5.4.0
 
   # 应用信息
-  package_info_plus: ^5.0.1
+  package_info_plus: ^9.0.0
 
 dev_dependencies:
   flutter_test:
