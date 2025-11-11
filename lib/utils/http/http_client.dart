@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:chenille_comptabilite/utils/http/http_config.dart';
@@ -267,13 +268,32 @@ class HttpClient {
     T Function(dynamic)? parser,
   ) {
     try {
-      final data = response.data;
+      var data = response.data;
+
+      // 如果返回的是字符串，尝试解析为JSON
+      if (data is String) {
+        try {
+          data = jsonDecode(data);
+        } catch (e) {
+          // 如果不是JSON格式，保持原样
+        }
+      }
 
       // 如果返回的是标准格式 {code, data, message}
       if (data is Map<String, dynamic>) {
-        return custom.HttpResponse.fromJson(
-          data,
-          dataParser: parser,
+        // 检查是否有标准的响应格式字段
+        if (data.containsKey('code') ||
+            data.containsKey('data') ||
+            data.containsKey('message')) {
+          return custom.HttpResponse.fromJson(
+            data,
+            dataParser: parser,
+          );
+        }
+
+        // 否则将整个 Map 作为数据返回
+        return custom.HttpResponse.success(
+          data: parser != null ? parser(data) : data as T,
         );
       }
 

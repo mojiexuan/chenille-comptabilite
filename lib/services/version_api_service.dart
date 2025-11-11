@@ -1,5 +1,6 @@
 import 'package:chenille_comptabilite/utils/http/http.dart';
 import 'package:chenille_comptabilite/models/version_info.dart';
+import 'package:chenille_comptabilite/config/api_config.dart';
 
 /// 版本API服务
 class VersionApiService {
@@ -13,7 +14,7 @@ class VersionApiService {
       _initHttpClient();
 
       final response = await _client.get<VersionInfo>(
-        '',
+        ApiConfig.versionCheckUrl,
         parser: (data) => VersionInfo.fromJson(data),
       );
 
@@ -30,14 +31,13 @@ class VersionApiService {
   void _initHttpClient() {
     try {
       _client.init(HttpConfig(
-        baseUrl: 'https://chenille.chenjiabao.cn',
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
-        enableLog: false, // 版本检查不需要日志
+        baseUrl: ApiConfig.baseUrl,
+        connectTimeout: Duration(seconds: ApiConfig.versionCheckTimeout),
+        receiveTimeout: Duration(seconds: ApiConfig.versionCheckTimeout),
+        enableLog: ApiConfig.enableLog,
       ));
     } catch (e) {
       // 如果已经初始化过，会抛出异常，忽略即可
     }
   }
 }
-
