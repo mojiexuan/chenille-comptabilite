@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:chenille_comptabilite/config/theme.dart';
 import 'package:chenille_comptabilite/config/splash_slogans.dart';
 import 'package:chenille_comptabilite/providers/data_provider.dart';
+import 'package:chenille_comptabilite/services/version_service.dart';
 import 'package:chenille_comptabilite/pages/main_page.dart';
 import 'package:chenille_comptabilite/pages/splash/widgets/splash_content.dart';
 
@@ -120,12 +121,30 @@ class _SplashPageState extends State<SplashPage>
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
     await dataProvider.init();
 
+    // 初始化版本服务
+    await _initVersionService();
+
     // 等待至少2秒，确保用户能看到启动页
     await Future.delayed(const Duration(seconds: 2));
 
     if (mounted) {
       _restoreSystemUI();
       _navigateToMainPage();
+    }
+  }
+
+  /// 初始化版本服务并自动检测更新
+  Future<void> _initVersionService() async {
+    try {
+      final versionService = VersionService();
+      await versionService.init();
+
+      // 自动检测更新（每天只检测一次）
+      if (versionService.shouldAutoCheck()) {
+        versionService.checkUpdate(manual: false);
+      }
+    } catch (e) {
+      debugPrint('[SplashPage] 初始化版本服务失败：$e');
     }
   }
 

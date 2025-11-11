@@ -34,7 +34,8 @@ class StorageService {
   }
 
   /// 保存JSON数组
-  static Future<bool> setJsonList(String key, List<Map<String, dynamic>> value) async {
+  static Future<bool> setJsonList(
+      String key, List<Map<String, dynamic>> value) async {
     final jsonString = json.encode(value);
     return await setString(key, jsonString);
   }
@@ -47,6 +48,16 @@ class StorageService {
     return decoded.map((e) => e as Map<String, dynamic>).toList();
   }
 
+  /// 保存布尔值
+  static Future<bool> setBool(String key, bool value) async {
+    return await _prefs!.setBool(key, value);
+  }
+
+  /// 获取布尔值
+  static bool? getBool(String key) {
+    return _prefs!.getBool(key);
+  }
+
   /// 删除指定键
   static Future<bool> remove(String key) async {
     return await _prefs!.remove(key);
@@ -57,4 +68,3 @@ class StorageService {
     return await _prefs!.clear();
   }
 }
-

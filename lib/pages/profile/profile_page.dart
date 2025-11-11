@@ -7,6 +7,7 @@ import 'package:chenille_comptabilite/pages/profile/handlers/profile_action_hand
 import 'package:chenille_comptabilite/pages/profile/widgets/user_info_card.dart';
 import 'package:chenille_comptabilite/pages/profile/widgets/profile_section.dart';
 import 'package:chenille_comptabilite/pages/profile/widgets/profile_menu_item.dart';
+import 'package:chenille_comptabilite/widgets/update_checker_button.dart';
 
 /// 我的页面
 class ProfilePage extends StatelessWidget {
@@ -62,6 +63,12 @@ class ProfilePage extends StatelessWidget {
                 ProfileSection(
                   title: '关于',
                   children: [
+                    // 检查更新按钮
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: UpdateCheckerButton(),
+                    ),
+                    const SizedBox(height: 12),
                     ProfileMenuItem(
                       icon: Icons.info_outline,
                       title: '关于毛虫记账',
